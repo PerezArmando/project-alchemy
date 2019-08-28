@@ -1,0 +1,28 @@
+<div class="data-table-container">
+    <table>
+        <thead [ngStyle]="{ 'width': dimensions?.width }">
+            <tr>
+                <th *ngIf="showCheckboxes">
+                    <ng-al-checkbox [checked]="topCheckboxChecked" (onCheckboxClicked)="onTopCheckboxClicked($event)">
+                    </ng-al-checkbox>
+                </th>
+                <th *ngFor="let column of columns" [ngClass]="contentAlignment">
+                    {{ column.label }}
+                </th>
+            </tr>
+        </thead>
+        <tbody [ngStyle]="dimensions">
+            <ng-container *ngFor="let row of rows">
+                <tr>
+                    <td *ngIf="showCheckboxes">
+                        <ng-al-checkbox [checked]="row.checked" (onCheckboxClicked)="onCheckboxClicked($event, row)">
+                        </ng-al-checkbox>
+                    </td>
+                    <td *ngFor="let column of columns" [ngClass]="contentAlignment">
+                        {{ row[column.key] }}
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

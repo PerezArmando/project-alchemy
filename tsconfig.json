@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-alchemy-lib": [
+        "dist/ng-alchemy-lib"
+      ],
+      "ng-alchemy-lib/*": [
+        "dist/ng-alchemy-lib/*"
+      ]
+    }
   }
 }
