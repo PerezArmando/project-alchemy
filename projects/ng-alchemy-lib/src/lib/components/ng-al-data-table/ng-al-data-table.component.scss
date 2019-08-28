@@ -1,67 +1,67 @@
 @import './../../themes/light.scss';
 
 .data-table-container > * {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    color: $font;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: $font;
 }
 
 .data-table-container > table {
-    display: block;
-    table-layout: fixed;
+	display: block;
+	table-layout: fixed;
 }
 
 .data-table-container > table > thead {
-    background-color: $thead;
+	background-color: $thead;
 }
 
 .data-table-container > table > tbody {
-    background-color: $tbody;
-    overflow-y: auto;
+	background-color: $tbody;
+	overflow-y: auto;
 }
 
 .data-table-container > table > tbody,
 .data-table-container > table > thead {
-    display: block;
-    width: 100%;
+	display: block;
+	width: 100%;
 }
 
 tr {
-    display: flex;
-    border-bottom: solid 1px $border;
+	display: flex;
+	border-bottom: solid 1px $border;
 }
 
 tr:last-child {
-    border-bottom: none;
+	border-bottom: none;
 }
 
 tr > th,
 tr > td {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 tr > th:first-child,
 tr > td:first-child {
-    width: 30px;
-    justify-content: center;
+	width: 30px;
+	justify-content: center;
 }
 
 tr > th:not(:first-child),
 tr > td:not(:first-child) {
-    flex: 1;
-    padding: 10px;
+	flex: 1;
+	padding: 10px;
 }
 
 .content-to-left {
-    justify-content: flex-start;
+	justify-content: flex-start;
 }
 
 .content-to-center {
-    justify-content: center;
+	justify-content: center;
 }
 
 .content-to-right {
-    justify-content: flex-end;
+	justify-content: flex-end;
 }
