@@ -6,7 +6,13 @@
 					<ng-al-checkbox [checked]="topCheckboxChecked" (onCheckboxClicked)="onTopCheckboxClicked($event)"> </ng-al-checkbox>
 				</th>
 				<th *ngFor="let column of columns" [ngClass]="contentAlignment">
-					{{ column.label }}
+					<div class="column-name-and-sorting-icons">
+						<span class="column-name">{{ column.label }}</span>
+						<fa class="icon" name="sort-down" *ngIf="!!sortingConfig.sortingEnabled"></fa>
+					</div>
+					<div class="column-options">
+						<fa class="icon" name="cog"></fa>
+					</div>
 				</th>
 			</tr>
 		</thead>

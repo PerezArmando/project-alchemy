@@ -65,3 +65,29 @@ tr > td:not(:first-child) {
 .content-to-right {
 	justify-content: flex-end;
 }
+
+thead th {
+	padding: 0 !important;
+	height: 36px;
+	display: flex;
+	justify-content: space-between;
+}
+
+thead th:not(:first-child) {
+	padding: 0 10px !important;
+}
+
+thead th > .column-name-and-sorting-icons,
+thead th > .column-options {
+	height: inherit;
+	display: flex;
+	align-items: center;
+}
+
+thead th > .column-name-and-sorting-icons > .icon {
+	height: 20px;
+}
+
+thead th > .column-name-and-sorting-icons > .column-name {
+	margin-right: 5px;
+}

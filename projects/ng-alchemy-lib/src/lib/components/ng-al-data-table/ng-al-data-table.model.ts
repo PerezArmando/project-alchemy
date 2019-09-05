@@ -18,7 +18,15 @@ export interface EditionConfig {
 	currRowIdBeingEdited?: Row;
 }
 
-export interface SortingConfig {}
+export interface SortingColumnConfig {
+	columnKey?: string;
+	sorting?: Function;
+}
+
+export interface SortingConfig {
+	sortingEnabled?: boolean;
+	onColumns?: SortingColumnConfig;
+}
 
 export interface Row {
 	id: number | string;
