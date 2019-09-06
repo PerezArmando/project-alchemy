@@ -158,11 +158,24 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewI
 	private performSort(columnKey: string): void {
 		const currDirection = this.settings.sortingConfig[columnKey].direction;
 		this.settings.sortingConfig[columnKey].direction = currDirection === 'down' ? 'up' : 'down';
+		this.defaultSort(columnKey, this.settings.sortingConfig[columnKey].direction);
 	}
 
 	public onColumnHeaderClicked(columnKey: string): void {
 		if (!!this.settings.sortingConfig[columnKey]) {
 			this.performSort(columnKey);
 		}
+	}
+
+	private defaultSort(columnKey: string, direction: string): void {
+		this.rows.sort((rowA, rowB) => {
+			const determinant: number = direction === 'up' ? -1 : 1;
+			if (rowA[columnKey] < rowB[columnKey]) {
+				return -1 * determinant;
+			} else if (rowA[columnKey] > rowB[columnKey]) {
+				return 1 * determinant;
+			}
+			return 0;
+		});
 	}
 }
