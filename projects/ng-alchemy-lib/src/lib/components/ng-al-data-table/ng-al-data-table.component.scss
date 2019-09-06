@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
-	color: $font;
+	color: $not-black;
 }
 
 .data-table-container > table {
@@ -13,11 +13,11 @@
 }
 
 .data-table-container > table > thead {
-	background-color: $thead;
+	background-color: $lightgray;
 }
 
 .data-table-container > table > tbody {
-	background-color: $tbody;
+	background-color: $almost-white;
 	overflow-y: auto;
 }
 
@@ -29,7 +29,7 @@
 
 tr {
 	display: flex;
-	border-bottom: solid 1px $border;
+	border-bottom: solid 1px $not-sure-if-its-gray;
 }
 
 tr:last-child {
@@ -93,7 +93,7 @@ thead th > .column-name-and-sorting-icons > .column-name {
 
 .column-header:hover {
 	cursor: pointer;
-	background-color: darken($thead, 10%);
+	background-color: darken($lightgray, 10%);
 }
 
 .last-column-margin {

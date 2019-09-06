@@ -1,0 +1,27 @@
+@import './../../themes/light.scss';
+
+.button {
+	border: solid 1px $not-sure-if-its-gray;
+	padding: 5px;
+	background-color: $almost-white;
+}
+
+.button,
+.dots {
+	margin-left: 10px;
+}
+
+.button:first-child {
+	margin-left: 0;
+}
+
+.button:hover {
+	cursor: pointer;
+	background-color: darken($almost-white, 10%);
+}
+
+.paginator-container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
