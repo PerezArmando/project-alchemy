@@ -18,8 +18,9 @@ export interface EditionConfig {
 	currRowIdBeingEdited?: Row;
 }
 
-export interface SortingColumnConfig {
+export class SortingColumnConfig {
 	columnKey?: string;
+	direction?: 'up' | 'down' = 'down';
 	sorting?: Function;
 }
 

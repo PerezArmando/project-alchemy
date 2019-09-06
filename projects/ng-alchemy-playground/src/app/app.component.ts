@@ -19,6 +19,13 @@ interface User extends Row {
 export class AppComponent {
 	public columns = [{ key: 'firstName', label: 'First Name' }, { key: 'lastName', label: 'Last Name' }, { key: 'age', label: 'Age' }];
 
+	public sortingConfig = {
+		firstName: {
+			sorting: () => {},
+			direction: 'down'
+		}
+	};
+
 	public rows: User[] = [
 		{
 			id: 1,

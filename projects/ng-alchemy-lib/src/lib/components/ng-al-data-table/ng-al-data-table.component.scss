@@ -54,15 +54,15 @@ tr > td:not(:first-child) {
 	padding: 10px;
 }
 
-.content-to-left {
+.left {
 	justify-content: flex-start;
 }
 
-.content-to-center {
+.center {
 	justify-content: center;
 }
 
-.content-to-right {
+.right {
 	justify-content: flex-end;
 }
 
@@ -90,4 +90,9 @@ thead th > .column-name-and-sorting-icons > .icon {
 
 thead th > .column-name-and-sorting-icons > .column-name {
 	margin-right: 5px;
+}
+
+.column-header:hover {
+	cursor: pointer;
+	background-color: darken($thead, 10%);
 }

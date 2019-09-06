@@ -17,39 +17,52 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit {
 	public dimensions: Dimensions = {};
 
 	@Input()
-	public editionConfig: EditionConfig = {
-		editingEnabled: true,
-		isWholeRowEdit: false
-	};
+	set editionConfig(config: EditionConfig) {
+		this.settings.editionConfig = config;
+	}
+
+	get editionConfig() {
+		return this.settings.editionConfig;
+	}
 
 	@Input()
-	public sortingConfig: SortingConfig = {};
+	set sortingConfig(config: any) {
+		this.settings.sortingConfig = config;
+	}
+
+	get sortingConfig() {
+		return this.settings.sortingConfig;
+	}
 
 	@Input()
 	set selectionMode(mode: 'checkbox' | 'multiple' | 'single' | 'none') {
 		this.showCheckboxes = mode === 'checkbox';
-		this._selectionMode = mode;
-	}
-
-	@Input()
-	set contentAlignment(option: 'left' | 'right' | 'center') {
-		this._contentAlignment[`content-to-${option}`] = true;
-	}
-
-	get contentAlignment() {
-		return this._contentAlignment;
+		this.settings.selectionMode = mode;
 	}
 
 	get selectionMode() {
-		return this._selectionMode;
+		return this.settings.selectionMode;
+	}
+
+	@Input()
+	set contentAlignmentConfig(alignment: 'left' | 'right' | 'center') {
+		this.settings.contentAlignmentConfig = alignment;
+	}
+
+	get contentAlignmentConfig() {
+		return this.settings.contentAlignmentConfig;
 	}
 
 	public showCheckboxes: boolean = false;
 
 	public topCheckboxChecked: boolean = false;
 
-	private _selectionMode: any = 'none';
-	private _contentAlignment: any = { 'justify-content': 'center' };
+	private settings: any = {
+		selectionMode: 'none',
+		sortingConfig: {},
+		contentAlignmentConfig: 'left',
+		editionConfig: { editingEnabled: true, isWholeRowEdit: false }
+	};
 
 	ngOnInit() {
 		this.addOutsideTableAreaClickEvent();

@@ -5,10 +5,10 @@
 				<th *ngIf="showCheckboxes">
 					<ng-al-checkbox [checked]="topCheckboxChecked" (onCheckboxClicked)="onTopCheckboxClicked($event)"> </ng-al-checkbox>
 				</th>
-				<th *ngFor="let column of columns" [ngClass]="contentAlignment">
+				<th *ngFor="let column of columns" [ngClass]="{ contentAlignmentConfig: true, 'column-header': !!sortingConfig[column.key] }">
 					<div class="column-name-and-sorting-icons">
 						<span class="column-name">{{ column.label }}</span>
-						<fa class="icon" name="sort-down" *ngIf="!!sortingConfig.sortingEnabled"></fa>
+						<fa class="icon" name="sort-{{ sortingConfig[column.key].direction }}" *ngIf="!!sortingConfig[column.key]"></fa>
 					</div>
 					<div class="column-options">
 						<fa class="icon" name="cog"></fa>
@@ -22,7 +22,7 @@
 					<td *ngIf="showCheckboxes">
 						<ng-al-checkbox [checked]="row.checked" (onCheckboxClicked)="onCheckboxClicked($event, row)"> </ng-al-checkbox>
 					</td>
-					<td *ngFor="let column of columns" [ngClass]="contentAlignment">
+					<td *ngFor="let column of columns" [ngClass]="{ contentAlignmentConfig: true }">
 						<ng-container
 							[ngTemplateOutletContext]="{ row: row, column: column }"
 							[ngTemplateOutlet]="editionConfig.isWholeRowEdit ? wholeRowEdit : singleCellEdit"
