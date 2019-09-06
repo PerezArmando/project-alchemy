@@ -158,7 +158,10 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewI
 	private performSort(columnKey: string): void {
 		const currDirection = this.settings.sortingConfig[columnKey].direction;
 		this.settings.sortingConfig[columnKey].direction = currDirection === 'down' ? 'up' : 'down';
-		this.defaultSort(columnKey, this.settings.sortingConfig[columnKey].direction);
+
+		if (!this.settings.sortingConfig[columnKey].sorting) {
+			this.defaultSort(columnKey, this.settings.sortingConfig[columnKey].direction);
+		}
 	}
 
 	public onColumnHeaderClicked(columnKey: string): void {
@@ -168,11 +171,12 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewI
 	}
 
 	private defaultSort(columnKey: string, direction: string): void {
+		const type: any = this.settings.sortingConfig[columnKey].type;
 		this.rows.sort((rowA, rowB) => {
 			const determinant: number = direction === 'up' ? -1 : 1;
-			if (rowA[columnKey] < rowB[columnKey]) {
+			if (type(rowA[columnKey]) < type(rowB[columnKey])) {
 				return -1 * determinant;
-			} else if (rowA[columnKey] > rowB[columnKey]) {
+			} else if (type(rowA[columnKey]) > type(rowB[columnKey])) {
 				return 1 * determinant;
 			}
 			return 0;

@@ -21,12 +21,12 @@ export class AppComponent {
 
 	public sortingConfig = {
 		firstName: {
-			sorting: () => {},
-			direction: 'down'
+			direction: 'down',
+			type: String
 		},
 		age: {
-			sorting: () => {},
-			direction: 'down'
+			direction: 'down',
+			type: Number
 		}
 	};
 
