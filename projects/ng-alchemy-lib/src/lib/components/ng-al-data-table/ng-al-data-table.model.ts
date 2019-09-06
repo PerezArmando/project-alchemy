@@ -1,3 +1,6 @@
+export type SelectionMode = 'checkbox' | 'multiple' | 'single' | 'none';
+export type ContentAlignment = 'left' | 'right' | 'center';
+
 export interface Column {
 	key: string;
 	label: string;
@@ -33,4 +36,11 @@ export interface Row {
 	id: number | string;
 	checked?: boolean;
 	edit?: boolean;
+}
+
+export class Settings {
+	selectionMode: SelectionMode = 'none';
+	sortingConfig: any = {};
+	contentAlignmentConfig: ContentAlignment = 'left';
+	editionConfig?: EditionConfig = { editingEnabled: true, isWholeRowEdit: false };
 }

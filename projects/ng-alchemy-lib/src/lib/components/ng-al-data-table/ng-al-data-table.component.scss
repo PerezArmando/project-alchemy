@@ -70,7 +70,6 @@ thead th {
 	padding: 0 !important;
 	height: 36px;
 	display: flex;
-	justify-content: space-between;
 }
 
 thead th:not(:first-child) {
@@ -84,8 +83,12 @@ thead th > .column-options {
 	align-items: center;
 }
 
-thead th > .column-name-and-sorting-icons > .icon {
-	height: 20px;
+.up-sort {
+	margin-bottom: -5px;
+}
+
+.down-sort {
+	margin-bottom: 5px;
 }
 
 thead th > .column-name-and-sorting-icons > .column-name {

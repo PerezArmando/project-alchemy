@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Column, Dimensions, Row, EditionConfig, Cell, SortingConfig } from './ng-al-data-table.model';
+import { Column, Dimensions, Row, EditionConfig, Cell, Settings, SelectionMode, ContentAlignment } from './ng-al-data-table.model';
 
 @Component({
 	selector: 'ng-al-data-table',
@@ -35,17 +35,17 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit {
 	}
 
 	@Input()
-	set selectionMode(mode: 'checkbox' | 'multiple' | 'single' | 'none') {
-		this.showCheckboxes = mode === 'checkbox';
-		this.settings.selectionMode = mode;
+	set selectionModeConfig(selectionMode: SelectionMode) {
+		this.showCheckboxes = selectionMode === ('checkbox' as SelectionMode);
+		this.settings.selectionMode = selectionMode as SelectionMode;
 	}
 
-	get selectionMode() {
+	get selectionModeConfig() {
 		return this.settings.selectionMode;
 	}
 
 	@Input()
-	set contentAlignmentConfig(alignment: 'left' | 'right' | 'center') {
+	set contentAlignmentConfig(alignment: ContentAlignment) {
 		this.settings.contentAlignmentConfig = alignment;
 	}
 
@@ -53,16 +53,15 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit {
 		return this.settings.contentAlignmentConfig;
 	}
 
+	public headerCellConfig(columnKey: string) {
+		return { [this.contentAlignmentConfig]: true, 'column-header': !!this.sortingConfig[columnKey] };
+	}
+
 	public showCheckboxes: boolean = false;
 
 	public topCheckboxChecked: boolean = false;
 
-	private settings: any = {
-		selectionMode: 'none',
-		sortingConfig: {},
-		contentAlignmentConfig: 'left',
-		editionConfig: { editingEnabled: true, isWholeRowEdit: false }
-	};
+	private settings: Settings = new Settings();
 
 	ngOnInit() {
 		this.addOutsideTableAreaClickEvent();
@@ -132,6 +131,17 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit {
 		row[column.key] = value;
 		if (switchState) {
 			this.switchEditionState(row, column);
+		}
+	}
+
+	private performSort(columnKey: string): void {
+		const currDirection = this.settings.sortingConfig[columnKey].direction;
+		this.settings.sortingConfig[columnKey].direction = currDirection === 'down' ? 'up' : 'down';
+	}
+
+	public onColumnHeaderClicked(columnKey: string): void {
+		if (!!this.settings.sortingConfig[columnKey]) {
+			this.performSort(columnKey);
 		}
 	}
 }

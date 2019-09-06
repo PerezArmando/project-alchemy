@@ -5,13 +5,13 @@
 				<th *ngIf="showCheckboxes">
 					<ng-al-checkbox [checked]="topCheckboxChecked" (onCheckboxClicked)="onTopCheckboxClicked($event)"> </ng-al-checkbox>
 				</th>
-				<th *ngFor="let column of columns" [ngClass]="{ contentAlignmentConfig: true, 'column-header': !!sortingConfig[column.key] }">
+				<th *ngFor="let column of columns" [ngClass]="headerCellConfig(column.key)" (click)="onColumnHeaderClicked(column.key)">
 					<div class="column-name-and-sorting-icons">
 						<span class="column-name">{{ column.label }}</span>
-						<fa class="icon" name="sort-{{ sortingConfig[column.key].direction }}" *ngIf="!!sortingConfig[column.key]"></fa>
-					</div>
-					<div class="column-options">
-						<fa class="icon" name="cog"></fa>
+						<ng-container
+							[ngTemplateOutlet]="sortIcon"
+							[ngTemplateOutletContext]="{ direction: sortingConfig[column.key]?.direction }"
+						></ng-container>
 					</div>
 				</th>
 			</tr>
@@ -22,7 +22,7 @@
 					<td *ngIf="showCheckboxes">
 						<ng-al-checkbox [checked]="row.checked" (onCheckboxClicked)="onCheckboxClicked($event, row)"> </ng-al-checkbox>
 					</td>
-					<td *ngFor="let column of columns" [ngClass]="{ contentAlignmentConfig: true }">
+					<td *ngFor="let column of columns" [ngClass]="contentAlignmentConfig">
 						<ng-container
 							[ngTemplateOutletContext]="{ row: row, column: column }"
 							[ngTemplateOutlet]="editionConfig.isWholeRowEdit ? wholeRowEdit : singleCellEdit"
@@ -54,4 +54,10 @@
 		*ngIf="row[column.key + '_' + row.id]"
 		(valueEmitter)="onBlurTableInputCell($event, row, column)"
 	></ng-al-input>
+</ng-template>
+
+<ng-template #sortIcon let-direction="direction">
+	<div [ngClass]="{ 'up-sort': direction === 'up', 'down-sort': direction === 'down' }">
+		<fa class="sort-icon" name="sort-{{ direction }}"></fa>
+	</div>
 </ng-template>
