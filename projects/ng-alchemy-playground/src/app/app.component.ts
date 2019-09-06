@@ -26,51 +26,51 @@ export class AppComponent {
 		},
 		age: {
 			sorting: () => {},
-			direction: 'up'
+			direction: 'down'
 		}
 	};
 
 	public rows: User[] = [
 		{
 			id: 1,
-			firstName: 'Cesar',
-			lastName: 'Perez',
+			firstName: 'Anderson',
+			lastName: 'Contreras',
 			age: 28,
 			checked: true
 		},
 		{
 			id: 2,
-			firstName: 'Lyza',
-			lastName: 'Parra',
-			age: 26,
+			firstName: 'Nilson',
+			lastName: 'Trejo',
+			age: 27,
 			checked: true
 		},
 		{
 			id: 3,
 			firstName: 'Cesar',
 			lastName: 'Perez',
-			age: 28,
-			checked: true
-		},
-		{
-			id: 4,
-			firstName: 'Lyza',
-			lastName: 'Parra',
 			age: 26,
 			checked: true
 		},
 		{
+			id: 4,
+			firstName: 'Geronimo',
+			lastName: 'Diaz',
+			age: 25,
+			checked: true
+		},
+		{
 			id: 5,
-			firstName: 'Cesar',
-			lastName: 'Perez',
-			age: 28,
+			firstName: 'Jose',
+			lastName: 'Fajardo',
+			age: 24,
 			checked: true
 		},
 		{
 			id: 6,
-			firstName: 'Cesar',
-			lastName: 'Perez',
-			age: 28,
+			firstName: 'Jesus',
+			lastName: 'Jimenez',
+			age: 23,
 			checked: true
 		}
 	];
