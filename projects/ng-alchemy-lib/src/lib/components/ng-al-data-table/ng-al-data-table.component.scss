@@ -51,7 +51,7 @@ tr > td:first-child {
 tr > th:not(:first-child),
 tr > td:not(:first-child) {
 	flex: 1;
-	padding: 10px;
+	padding: 10px 5px;
 }
 
 .left {
@@ -72,10 +72,6 @@ thead th {
 	display: flex;
 }
 
-thead th:not(:first-child) {
-	padding: 0 10px !important;
-}
-
 thead th > .column-name-and-sorting-icons,
 thead th > .column-options {
 	height: inherit;
@@ -92,10 +88,14 @@ thead th > .column-options {
 }
 
 thead th > .column-name-and-sorting-icons > .column-name {
-	margin-right: 5px;
+	margin: 0 5px;
 }
 
 .column-header:hover {
 	cursor: pointer;
 	background-color: darken($thead, 10%);
+}
+
+.last-column-margin {
+	margin-right: 16px;
 }

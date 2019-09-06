@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Column, Dimensions, Row, EditionConfig, Cell, Settings, SelectionMode, ContentAlignment } from './ng-al-data-table.model';
 
 @Component({
@@ -6,12 +6,12 @@ import { Column, Dimensions, Row, EditionConfig, Cell, Settings, SelectionMode, 
 	templateUrl: './ng-al-data-table.component.html',
 	styleUrls: ['./ng-al-data-table.component.scss']
 })
-export class NgAlDataTableComponent<T extends Row> implements OnInit {
+export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewInit {
 	@Input()
 	public columns: Column[] = [];
 
 	@Input()
-	public rows: T[];
+	public rows: T[] = [];
 
 	@Input()
 	public dimensions: Dimensions = {};
@@ -20,6 +20,8 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit {
 	set editionConfig(config: EditionConfig) {
 		this.settings.editionConfig = config;
 	}
+
+	@ViewChild('headerRow') headerRow: ElementRef;
 
 	get editionConfig() {
 		return this.settings.editionConfig;
@@ -54,18 +56,37 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit {
 	}
 
 	public headerCellConfig(columnKey: string) {
-		return { [this.contentAlignmentConfig]: true, 'column-header': !!this.sortingConfig[columnKey] };
+		const config = { [this.contentAlignmentConfig]: true, 'column-header': !!this.sortingConfig[columnKey] };
+
+		if (this.hasScrollBar && this.columns[this.columns.length - 1].key === columnKey) {
+			config['last-column-margin'] = true;
+		}
+
+		return config;
 	}
 
 	public showCheckboxes: boolean = false;
-
 	public topCheckboxChecked: boolean = false;
-
+	public hasScrollBar: boolean = false;
 	private settings: Settings = new Settings();
 
 	ngOnInit() {
 		this.addOutsideTableAreaClickEvent();
 		this.setTopCheckboxAsCheckedOrNot(this.areAllRowsAreChecked());
+	}
+
+	ngAfterViewInit() {
+		this.alignColumnHeaders();
+	}
+
+	private alignColumnHeaders() {
+		const rowHeight: number = 36;
+
+		this.hasScrollBar =
+			!!this.dimensions.height &&
+			!!this.rows.length &&
+			navigator.platform.includes('Win') &&
+			this.rows.length * rowHeight > Number(this.dimensions.height.split('px')[0]);
 	}
 
 	private addOutsideTableAreaClickEvent(): void {

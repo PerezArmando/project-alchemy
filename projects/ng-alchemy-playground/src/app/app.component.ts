@@ -23,6 +23,10 @@ export class AppComponent {
 		firstName: {
 			sorting: () => {},
 			direction: 'down'
+		},
+		age: {
+			sorting: () => {},
+			direction: 'up'
 		}
 	};
 

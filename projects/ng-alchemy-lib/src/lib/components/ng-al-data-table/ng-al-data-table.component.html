@@ -1,9 +1,9 @@
 <div class="data-table-container">
 	<table>
 		<thead [ngStyle]="{ width: dimensions?.width }">
-			<tr>
+			<tr #headerRow>
 				<th *ngIf="showCheckboxes">
-					<ng-al-checkbox [checked]="topCheckboxChecked" (onCheckboxClicked)="onTopCheckboxClicked($event)"> </ng-al-checkbox>
+					<ng-al-checkbox [checked]="topCheckboxChecked" (onCheckboxClicked)="onTopCheckboxClicked($event)"></ng-al-checkbox>
 				</th>
 				<th *ngFor="let column of columns" [ngClass]="headerCellConfig(column.key)" (click)="onColumnHeaderClicked(column.key)">
 					<div class="column-name-and-sorting-icons">
@@ -35,7 +35,7 @@
 </div>
 
 <ng-template #wholeRowEdit let-row="row" let-column="column">
-	<span (click)="onRowBeingClicked($event, row, column)" *ngIf="!row.edit">{{ row[column.key] }}</span>
+	<span class="data" (click)="onRowBeingClicked($event, row, column)" *ngIf="!row.edit">{{ row[column.key] }}</span>
 	<ng-al-input
 		*ngIf="row.edit"
 		type="text"
@@ -46,7 +46,7 @@
 </ng-template>
 
 <ng-template #singleCellEdit let-row="row" let-column="column">
-	<span (click)="switchEditionState(row, column)" *ngIf="!row[column.key + '_' + row.id]">{{ row[column.key] }}</span>
+	<span class="data" (click)="switchEditionState(row, column)" *ngIf="!row[column.key + '_' + row.id]">{{ row[column.key] }}</span>
 	<ng-al-input
 		type="text"
 		[autofocus]="true"
