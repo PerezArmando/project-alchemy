@@ -22,7 +22,12 @@
 					<td *ngIf="showCheckboxes">
 						<ng-al-checkbox [checked]="row.checked" (onCheckboxClicked)="onCheckboxClicked($event, row)"> </ng-al-checkbox>
 					</td>
-					<td *ngFor="let column of columns" [ngClass]="contentAlignmentConfig">
+					<td
+						*ngFor="let column of columns"
+						(click)="editionConfig.isWholeRowEdit ? onRowBeingClicked($event, row, column) : switchEditionState(row, column)"
+						[class.cell]="!editionConfig.isWholeRowEdit"
+						[ngClass]="contentAlignmentConfig"
+					>
 						<ng-container
 							[ngTemplateOutletContext]="{ row: row, column: column }"
 							[ngTemplateOutlet]="editionConfig.isWholeRowEdit ? wholeRowEdit : singleCellEdit"
@@ -38,7 +43,7 @@
 </div>
 
 <ng-template #wholeRowEdit let-row="row" let-column="column">
-	<span class="data" (click)="onRowBeingClicked($event, row, column)" *ngIf="!row.edit">{{ row[column.key] }}</span>
+	<span class="data" *ngIf="!row.edit">{{ row[column.key] }}</span>
 	<ng-al-input
 		*ngIf="row.edit"
 		type="text"
@@ -49,7 +54,7 @@
 </ng-template>
 
 <ng-template #singleCellEdit let-row="row" let-column="column">
-	<span class="data" (click)="switchEditionState(row, column)" *ngIf="!row[column.key + '_' + row.id]">{{ row[column.key] }}</span>
+	<span class="data" *ngIf="!row[column.key + '_' + row.id]">{{ row[column.key] }}</span>
 	<ng-al-input
 		type="text"
 		[autofocus]="true"
