@@ -115,6 +115,14 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewI
 		this.rows.forEach((row: Row) => (row.checked = checked));
 	}
 
+	public onCellBeingClicked(event: Event, row: Row, column: Column): void {
+		if (this.editionConfig.isWholeRowEdit) {
+			this.onRowBeingClicked(event, row, column);
+		} else if (!row[this.getCellName(column, row)]) {
+			this.switchEditionState(row, column);
+		}
+	}
+
 	public onRowBeingClicked(event: Event, row: Row, column: Column): void {
 		event.stopPropagation();
 		this.switchEditionState(row, column);
@@ -125,10 +133,15 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewI
 			if (this.editionConfig.isWholeRowEdit) {
 				this.isRowToBeSwitched(row);
 			} else {
-				const cellName: string = `${column.key}_${row.id}`;
-				row[cellName] = row[cellName] === undefined ? new Cell(true) : !row[cellName];
+				const edit: boolean = true;
+				const cellName: string = this.getCellName(column, row);
+				row[cellName] = row[cellName] === undefined ? new Cell(edit) : undefined;
 			}
 		}
+	}
+
+	private getCellName(column: Column, row: Row): string {
+		return `${column.key}_${row.id}`;
 	}
 
 	private isRowToBeSwitched(row: Row): void {

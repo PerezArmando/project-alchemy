@@ -13,6 +13,9 @@ export class NgAlInputComponent {
 	public input: ElementRef;
 
 	@Input()
+	public transparent: boolean = false;
+
+	@Input()
 	public type: string;
 
 	@Input()
@@ -20,6 +23,9 @@ export class NgAlInputComponent {
 
 	@Input()
 	public autofocus: boolean = false;
+
+	@Input()
+	public useWholeWidth: boolean = false;
 
 	ngAfterViewInit(): void {
 		this.setInputAsFocused();

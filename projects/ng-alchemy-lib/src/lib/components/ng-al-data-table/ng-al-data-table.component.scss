@@ -48,6 +48,10 @@ tr > td:first-child {
 	justify-content: center;
 }
 
+tr > td:not(:first-child) {
+	overflow: hidden;
+}
+
 tr > th:not(:first-child),
 tr > td:not(:first-child) {
 	flex: 1;
@@ -103,4 +107,8 @@ thead th > .column-name-and-sorting-icons > .column-name {
 .cell:hover {
 	cursor: pointer;
 	background-color: $not-sure-if-its-gray;
+}
+
+ng-al-input {
+	width: 100%;
 }
