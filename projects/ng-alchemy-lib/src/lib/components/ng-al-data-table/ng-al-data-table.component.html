@@ -43,7 +43,7 @@
 </div>
 
 <ng-template #wholeRowEdit let-row="row" let-column="column">
-	<span class="data" *ngIf="!row.edit">{{ row[column.key] }}</span>
+	<span *ngIf="!row.edit">{{ row[column.key] }}</span>
 	<ng-al-input
 		[useWholeWidth]="true"
 		[transparent]="true"
@@ -56,7 +56,7 @@
 </ng-template>
 
 <ng-template #singleCellEdit let-row="row" let-column="column">
-	<span class="data" *ngIf="!row[column.key + '_' + row.id]">{{ row[column.key] }}</span>
+	<span *ngIf="!row[column.key + '_' + row.id]">{{ row[column.key] }}</span>
 	<ng-al-input
 		[useWholeWidth]="true"
 		[transparent]="true"

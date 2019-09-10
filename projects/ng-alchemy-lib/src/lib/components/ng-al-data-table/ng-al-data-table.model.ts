@@ -11,10 +11,6 @@ export interface Dimensions {
 	width?: string;
 }
 
-export class Cell {
-	constructor(public edit: boolean) {}
-}
-
 export interface EditionConfig {
 	editingEnabled?: boolean;
 	isWholeRowEdit?: boolean;

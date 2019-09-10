@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Column, Dimensions, Row, EditionConfig, Cell, Settings, SelectionMode, ContentAlignment } from './ng-al-data-table.model';
+import { Column, Dimensions, Row, EditionConfig, Settings, SelectionMode, ContentAlignment } from './ng-al-data-table.model';
 
 @Component({
 	selector: 'ng-al-data-table',
@@ -133,9 +133,8 @@ export class NgAlDataTableComponent<T extends Row> implements OnInit, AfterViewI
 			if (this.editionConfig.isWholeRowEdit) {
 				this.isRowToBeSwitched(row);
 			} else {
-				const edit: boolean = true;
 				const cellName: string = this.getCellName(column, row);
-				row[cellName] = row[cellName] === undefined ? new Cell(edit) : undefined;
+				row[cellName] = !row[cellName];
 			}
 		}
 	}
